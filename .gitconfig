@@ -1,0 +1,11 @@
+[user]
+	name = Alexey Litvinov
+	email = iamhoneyboy@gmail.com
+[push]
+	default = simple
+[alias]
+	br = branch
+	co = checkout
+	ci = commit
+	st = status
+	last = log -1 HEAD
