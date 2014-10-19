@@ -80,4 +80,3 @@ export PATH=$HOME/bin:/usr/local/bin:$PATH
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export PATH=$PATH:node_modules/.bin
-unsetopt auto_cd
