@@ -1,3 +1,4 @@
 #! /bin/bash
 
-ln -s ./.vimrc ~/.vimrc
+cp ./.zshrc ~/.zshrc
+cp ./.vimrc ~/.vimrc
