@@ -1,4 +1,4 @@
 #! /bin/bash
 
-cp ./.zshrc ~/.zshrc
-cp ./.vimrc ~/.vimrc
+ln -s $(pwd)/.zshrc ~/.zshrc
+ln -s $(pwd)/.vimrc ~/.vimrc
