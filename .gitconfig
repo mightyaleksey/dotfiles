@@ -1,11 +1,15 @@
 [user]
 	name = Alexey Litvinov
 	email = iamhoneyboy@gmail.com
-[push]
-	default = simple
 [alias]
 	br = branch
 	co = checkout
-	ci = commit
+	ci = '!./git/ci.js'
+    di = "diff --color"
+    lg = "log --graph --format='format:%w(80)%Cgreen%h%Creset %Cred%d%Creset%n%s%n%Cgreen%an%Creset (%ar)%n'"
 	st = status
 	last = log -1 HEAD
+[core]
+    editor = /usr/bin/vim
+[push]
+    default = simple
