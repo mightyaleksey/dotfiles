@@ -4,7 +4,7 @@
 [alias]
 	br = branch
 	co = checkout
-	ci = "!($(dirname $(readlink ~/.gitconfig))/git/ci.js)"
+	ci = "!$(dirname $(readlink ~/.gitconfig))/git/ci.js"
     di = "diff --color"
     lg = "log --graph --format='format:%w(80)%Cgreen%h%Creset %Cred%d%Creset%n%s%n%Cgreen%an%Creset (%ar)%n'"
 	st = status
