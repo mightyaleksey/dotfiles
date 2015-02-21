@@ -17,7 +17,7 @@ Promise.all([mkdir(destPath), readdir(configPath)])
     }));
   }))
   .then(function (files) {
-    return Promise.all(files.map(symlink));
+    return Promise.all(files.map(link));
   })
   .catch(console.error);
 
@@ -62,6 +62,24 @@ function copy(source, target) {
 }
 
 /**
+ * Ликует файл в домашнюю директорию
+ * @param  {string}  file
+ * @return {promise}
+ */
+function link(file) {
+  var dest = path.join(getHomedir(), path.basename(file));
+  return symlink(file, dest)
+    .catch(function (err) {
+      if (err.code !== 'EEXIST') {
+        throw err;
+      }
+
+      return unlink(dest)
+        .then(symlink.bind(null, file, dest));
+    });
+}
+
+/**
  * Аналог mkdir -p
  * @param  {string}  dirpath
  * @param  {string}  mode
@@ -99,20 +117,36 @@ function readdir(dirpath) {
 }
 
 /**
- * Линкует указанный файл в домашнюю директорию пользователя
- * @param  {string}  filepath
+ * Линкует указанный файл
+ * @param  {string}  file
+ * @param  {string}  dest
  * @return {promise}
  */
-function symlink(filepath) {
+function symlink(file, dest) {
   return new Promise(function (resolve, reject) {
-    var dest = path.join(getHomedir(), path.basename(filepath));
-
-    fs.symlink(filepath, dest, function (resolve, reject) {
+    fs.symlink(file, dest, function (err) {
       if (err) {
         return reject(err);
       }
 
-      resolve(filepath);
+      resolve(file);
     });
+  });
+}
+
+/**
+ * Удаляет файл
+ * @param  {string}  file
+ * @return {promise}
+ */
+function unlink(file) {
+  return new Promise(function (resolve, reject) {
+    fs.unlink(file, function (err) {
+      if (err) {
+        return reject(err);
+      }
+
+      resolve(file);
+    })
   });
 }
