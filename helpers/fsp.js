@@ -1,6 +1,7 @@
 'use strict';
 
 var fs = require('fs');
+var through = require('through2');
 
 /**
  * Оборачивает функцию в промис
@@ -20,6 +21,59 @@ function promisify(fn, ctx) {
       fn.apply(ctx, args);
     });
   };
+}
+
+/**
+ * @param  {string}   srcpath
+ * @param  {string}   dstpath
+ */
+exports.copy = function (srcpath, dstpath) {
+  var readable = fs.createReadStream(srcpath);
+  var writable = fs.createWriteStream(dstpath);
+
+  return new Promise(function (resolve, reject) {
+    readable.once('error', reject);
+    writable.once('error', reject);
+
+    writable.once('finish', function () {
+      resolve(dstpath);
+    });
+
+    readable
+      .pipe(writable);
+  });
+}
+
+/**
+ * @return {string}
+ */
+exports.homedir = function () {
+  return process.env.HOME || process.env.HOMEPATH || process.env.USERPROFILE;
+};
+
+/**
+ * @param  {string}   srcpath
+ * @param  {string}   dstpath
+ * @param  {function} fn
+ */
+exports.transform = function (srcpath, dstpath, fn) {
+  var readable = fs.createReadStream(srcpath);
+  var transform = through.obj(fn);
+  var writable = fs.createWriteStream(dstpath);
+
+  return new Promise(function (resolve, reject) {
+    readable.once('error', reject);
+    transform.once('error', reject);
+    writable.once('error', reject);
+
+    writable.once('finish', function () {
+      resolve(dstpath);
+    });
+
+    readable
+      .pipe(transform)
+      .pipe(writable);
+  });
 }
 
 /**
