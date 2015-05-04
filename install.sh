@@ -23,4 +23,11 @@ for config in `ls -A $configs`; do
       -e "s/\#{email}/$EMAIL/" \
       $configs/$config > $sources/$config
   fi
+
+  if [ ! -f $configs/$config ]; then
+    ln -s $sources/$config ~/$config
+  elif [ "$sources/$config" != "`readlink ~/$config`" ]; then
+    rm ~/$config
+    ln -s $sources/$config ~/$config
+  fi
 done
