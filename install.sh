@@ -27,7 +27,7 @@ for config in `ls -A $configs`; do
       $configs/$config > $sources/$config
   fi
 
-  if [ ! -f $configs/$config ]; then
+  if [ ! -f ~/$config ]; then
     ln -s $sources/$config ~/$config
   elif [ "$sources/$config" != "`readlink ~/$config`" ]; then
     rm ~/$config
