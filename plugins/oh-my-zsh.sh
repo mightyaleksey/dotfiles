@@ -15,8 +15,6 @@ if [ -h ~/.zshrc ]; then
   exit
 fi
 
-# Создаем ссылку на файлик
-if [ $sources ]; then
-  mv ~/.zshrc $sources/.zshrc
-  ln -s $sources/.zshrc ~/.zshrc
-fi
+mv ~/.zshrc $sources/.zshrc
+stream $patches/.zshrc >> $sources/.zshrc
+ln -s $sources/.zshrc ~/.zshrc
