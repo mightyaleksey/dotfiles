@@ -8,3 +8,12 @@ for config in `ls -A $sources`; do
     cp $sources/$config ~/$config
   fi
 done
+
+# Удаление oh-my-zsh
+if [ -f ~/.oh-my-zsh/tools/uninstall.sh ]; then
+  sh ~/.oh-my-zsh/tools/uninstall.sh
+fi
+
+if [ -f ~/.zshrc ]; then
+  rm ~/.zshrc
+fi
