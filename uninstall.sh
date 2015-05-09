@@ -1,8 +1,10 @@
 #!/bin/sh
 cd `dirname $0`
-sources=`pwd`/sources
+repository=`pwd`
+configs=${repository}/configs
+sources=${repository}/sources
 
-for config in `ls -A $sources`; do
+for config in `ls -A $configs`; do
   if [ -h ~/$config ] && [ -f $sources/$config ]; then
     rm ~/$config
     cp $sources/$config ~/$config
