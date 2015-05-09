@@ -6,6 +6,7 @@ cd `dirname $0`
 # Нужные переменные
 repository=`pwd`
 configs=${repository}/configs
+patches=${repository}/patches
 plugins=${repository}/plugins
 sources=${repository}/sources
 
@@ -18,13 +19,17 @@ if [ ! -d $sources ]; then
   mkdir -p $sources
 fi
 
+stream() {
+  sed \
+    -e "s/\#{user}/$USER/" \
+    -e "s/\#{email}/$EMAIL/" \
+    $1
+}
+
 # Копируем + Патчим конфиги
 for config in `ls -A $configs`; do
   if [ ! -f $sources/$config ]; then
-    sed \
-      -e "s/\#{user}/$USER/" \
-      -e "s/\#{email}/$EMAIL/" \
-      $configs/$config > $sources/$config
+    stream $configs/$config > $sources/$config
   fi
 
   if [ ! -f ~/$config ]; then
