@@ -6,9 +6,9 @@ cd `dirname $0`
 # Нужные переменные
 repository=`pwd`
 configs=${repository}/configs
-patches=${repository}/patches
 plugins=${repository}/plugins
 sources=${repository}/sources
+themes=${repository}/themes
 
 : ${USER:=sullenor}
 : ${EMAIL:=iamhoneyboy@gmail.com}

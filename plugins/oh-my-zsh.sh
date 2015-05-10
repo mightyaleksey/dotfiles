@@ -5,16 +5,10 @@ if [ ! -d ~/.oh-my-zsh ]; then
   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh
 fi
 
-# Если нет файла, то облом :(
-if [ ! -f ~/.zshrc ]; then
-  exit
+if [ ! -f $sources/my.zsh ]; then
+  stream $themes/my.zsh > $sources/my.zsh
 fi
 
-# Если ссылка уже создана, то тоже ничего не делаем, так как нет оригинала
-if [ -h ~/.zshrc ]; then
-  exit
+if [ -d $ZSH/custom ]; then
+  ln -s $sources/my.zsh $ZSH/custom/my.zsh
 fi
-
-mv ~/.zshrc $sources/.zshrc
-stream $patches/.zshrc >> $sources/.zshrc
-ln -s $sources/.zshrc ~/.zshrc
