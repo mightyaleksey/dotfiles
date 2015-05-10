@@ -25,3 +25,9 @@ for config in `ls -A $CONFIGS`; do
     ln -s $SOURCES/$config ~/$config
   fi
 done
+
+echo 'Installing plugins'
+for plugin in $PLUGINS/*/install.sh; do
+  plugin_dir=`dirname $plugin`
+  source $plugin
+done
