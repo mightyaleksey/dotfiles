@@ -14,10 +14,11 @@ for config in `ls -A $CONFIGS`; do
   fi
 done
 
-if [ -f ~/.oh-my-zsh/tools/uninstall.sh ]; then
-  echo 'Removing oh-my-zsh'
-  sh ~/.oh-my-zsh/tools/uninstall.sh
-fi
+echo 'Removing plugins'
+for plugin in $PLUGINS/*/uninstall.sh; do
+  plugin_dir=`dirname $plugin`
+  source $plugin
+done
 
 if [ -d $SOURCES ]; then
   echo 'Removing copy of the local dotfiles'
