@@ -5,5 +5,5 @@ PLUGINS=${DOTFILES}/plugins
 SOURCES=${DOTFILES}/sources
 
 # Информация о пользователе
-USER='sullenor'
+USER='Alexey Litvinov'
 EMAIL='iamhoneyboy@gmail.com'
