@@ -1,8 +1,10 @@
 #!/bin/sh
+# Домашняя директория
 cd `dirname $0`/../
 DOTFILES=`pwd`
-CONFIGS=${DOTFILES}/configs
-SOURCES=${DOTFILES}/sources
+
+# Окружение
+source ${DOTFILES}/tools/env.sh
 
 echo 'Removing dotfiles from the home directory'
 for config in `ls -A $CONFIGS`; do
