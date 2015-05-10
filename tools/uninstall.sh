@@ -20,7 +20,7 @@ for plugin in $PLUGINS/*/uninstall.sh; do
   source $plugin
 done
 
+echo 'Removing copy of the local dotfiles'
 if [ -d $SOURCES ]; then
-  echo 'Removing copy of the local dotfiles'
   rm -rf $SOURCES
 fi
