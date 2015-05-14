@@ -6,6 +6,33 @@ DOTFILES=`pwd`
 # Окружение
 source ${DOTFILES}/tools/env.sh
 
+# Парсинг аргументов командной строки
+while [ $# -gt 0 ]; do
+  option="$1"
+
+  case $option in
+  -e|--email)
+    EMAIL="$2"; shift;;
+
+  -u|--user)
+    USER="$2"; shift;;
+
+  -h|--help)
+    echo
+    echo '  Usage: install.sh [options]'
+    echo
+    echo '  Options:'
+    echo
+    echo '    -h, --help            output usage information'
+    echo '    -u, --user <string>   sets the custom user name'
+    echo '    -e, --email <string>  sets the custom email'
+    echo
+    exit;;
+  esac
+
+  shift
+done
+
 stream() {
   sed \
     -e "s/\#{user}/$USER/" \
