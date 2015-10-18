@@ -5,7 +5,7 @@ dotfiles
 * `plugins` &mdash; плагины.
 * `tools` &mdash; нужные скрипты для работы (установка, удаление и т.д.).
 
-## sublime
+## sublime text
 
 * [Babel](https://packagecontrol.io/packages/Babel)
 * [Console Wrap for js](https://packagecontrol.io/packages/Console%20Wrap%20for%20js)
@@ -17,3 +17,10 @@ dotfiles
 ```javascript
 { "keys": ["super+shift+b"], "command": "reveal_in_side_bar" },
 ```
+
+## желания
+
+* настройка oh-my-zsh, подключение плагинов к oh-my-zsh.
+* конфиг под гит.
+* коммит с определенным email'ом (не из гитконфига).
+* синхронизация пакетов и настроек у sublime (либо через [PackageSync](https://packagecontrol.io/packages/PackageSync), либо вручную через симлинки).
