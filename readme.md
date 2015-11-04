@@ -13,6 +13,7 @@ dotfiles
 * [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview)
 * [Oceanic Next Color Scheme](https://packagecontrol.io/packages/Oceanic%20Next%20Color%20Scheme)
 * [Text Pastry](https://packagecontrol.io/packages/Text%20Pastry)
+* [GitSavvy](https://packagecontrol.io/packages/GitSavvy)
 
 ```javascript
 { "keys": ["super+shift+b"], "command": "reveal_in_side_bar" },
