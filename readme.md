@@ -14,6 +14,7 @@ dotfiles
 * [Oceanic Next Color Scheme](https://packagecontrol.io/packages/Oceanic%20Next%20Color%20Scheme)
 * [Text Pastry](https://packagecontrol.io/packages/Text%20Pastry)
 * [GitSavvy](https://packagecontrol.io/packages/GitSavvy)
+* [caniuse_local](https://packagecontrol.io/packages/caniuse_local)
 
 ```javascript
 { "keys": ["super+shift+b"], "command": "reveal_in_side_bar" },
