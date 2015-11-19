@@ -15,6 +15,7 @@ dotfiles
 * [Text Pastry](https://packagecontrol.io/packages/Text%20Pastry)
 * [GitSavvy](https://packagecontrol.io/packages/GitSavvy)
 * [caniuse_local](https://packagecontrol.io/packages/caniuse_local)
+* [Align​Tab](https://packagecontrol.io/packages/AlignTab?__s=zotxgkeczg4gxursvvdq)
 
 ```javascript
 { "keys": ["super+shift+b"], "command": "reveal_in_side_bar" },
