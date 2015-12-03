@@ -31,6 +31,7 @@ I'll mention some of my favorite ones below.
 * [GitSavvy](https://packagecontrol.io/packages/GitSavvy)
 * [caniuse_local](https://packagecontrol.io/packages/caniuse_local)
 * [Align​Tab](https://packagecontrol.io/packages/AlignTab?__s=zotxgkeczg4gxursvvdq)
+* [Sidebar Enhancements](https://packagecontrol.io/packages/SideBarEnhancements)
 
 ## Desires
 
