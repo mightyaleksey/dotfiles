@@ -20,8 +20,8 @@
 # Inside double quotes, double quote " and backslash \ characters must be escaped: use \" for " and \\ for \.
 
 [user]
-  name = #{user}
-  email = #{email}
+  name = ${1}
+  email = ${2}
 
 [core]
   editor = /usr/bin/vim
