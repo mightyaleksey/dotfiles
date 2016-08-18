@@ -1,4 +1,4 @@
-.PHONY: debug repo update upgrade
+.PHONY: debug repo update upgrade upgrade-st upgrade-zsh
 
 debug:
 	@echo hello, wanderer!
