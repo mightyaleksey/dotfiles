@@ -1,4 +1,4 @@
-.PHONY: debug sync update update-omz
+.PHONY: debug repo update upgrade
 
 debug:
 	@echo hello, wanderer!
@@ -9,11 +9,13 @@ repo:
 update:
 	git pull --rebase
 
-sync:
-	find ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User -name '*.sublime-snippet' \
-	| xargs -I % cp % sublime\ text/Packages/User/
-	find ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/JavaScript -name '*.sublime-snippet' \
-	| xargs -I % cp % sublime\ text/Packages/JavaScript/
+upgrade-st:
+	mkdir -p ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/JavaScript
+	mkdir -p ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
+	cp -r sublime\ text/Packages/JavaScript/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/JavaScript/
+	cp -r sublime\ text/Packages/User/* ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User/
 
-update-omz:
+upgrade-zsh:
 	cp -r oh-my-zsh/custom/plugins/* ~/.oh-my-zsh/custom/plugins/
+
+upgrade: upgrade-st upgrade-zsh
