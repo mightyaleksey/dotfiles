@@ -1,4 +1,10 @@
-.PHONY: sync update
+.PHONY: debug sync update update-omz
+
+debug:
+	@echo hello, wanderer!
+
+update:
+	git pull --rebase
 
 sync:
 	find ~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User -name '*.sublime-snippet' \
