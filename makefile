@@ -3,6 +3,9 @@
 debug:
 	@echo hello, wanderer!
 
+repo:
+	open https://github.com/sullenor/dotfiles
+
 update:
 	git pull --rebase
 
