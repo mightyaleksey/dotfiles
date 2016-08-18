@@ -4,6 +4,13 @@ dotfiles
 My environment configuration.
 
 
+## Installation
+
+```bash
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/sullenor/dotfiles/master/tool/install.sh)"
+```
+
+
 ## oh-my-zsh
 
 Personally, I'm fan of this framework. It has flexible [plugin](https://github.com/robbyrussell/oh-my-zsh#plugins) system and convenient commands for shell and git.
