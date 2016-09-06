@@ -5,6 +5,7 @@ dot () {
     return 1
   fi
 
-  (cd ~/.dotfiles; make $1)
-  return $?
+  origin=$(pwd)
+  (cd ~/.dotfiles; make origin="$origin" $1)
+  unset origin
 }

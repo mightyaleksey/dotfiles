@@ -1,7 +1,10 @@
-.PHONY: debug repo update upgrade upgrade-st upgrade-zsh
+.PHONY: debug npm repo update upgrade upgrade-st upgrade-zsh
 
 debug:
 	@echo hello, wanderer!
+
+npm:
+	cp -nv npm-package/{*,.[^.]*} $(origin)/ 2>/dev/null || :
 
 repo:
 	open https://github.com/sullenor/dotfiles
