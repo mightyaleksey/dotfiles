@@ -4,7 +4,8 @@ debug:
 	@echo hello, wanderer!
 
 npm:
-	@cp -nv npm-package/{*,.[^.]*} $(origin)/ 2>/dev/null || :
+	@cp -nv npm-package/.[^.]* $(origin)/ 2>/dev/null || :
+	@tool/pipe.sh npm-package/package.json $(origin)
 
 repo:
 	open https://github.com/sullenor/dotfiles
