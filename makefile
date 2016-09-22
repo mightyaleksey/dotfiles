@@ -5,6 +5,7 @@ debug:
 
 npm:
 	@cp -nv npm-package/.[^.]* $(origin)/ 2>/dev/null || :
+	@cp -nrv npm-package/{lib,test} $(origin)/ 2>/dev/null || :
 	@tool/pipe.sh npm-package/package.json $(origin)
 
 repo:
