@@ -1,9 +1,26 @@
 'use strict';
 
+exports.compose = compose;
 exports.constant = constant;
 exports.curry = curry;
 exports.identity = identity;
 exports.map = curry(map);
+
+function compose(...fn) {
+  const quantity = fn.length;
+  return composition;
+
+  function composition() {
+    var index = quantity - 1;
+    var result = quantity
+      ? fn[index].apply(this, arguments)
+      : arguments[0];
+
+    if (index < 1) return result;
+    while (index--) result = fn[index].call(this, result);
+    return result;
+  }
+}
 
 // constant :: a -> (_ -> a)
 function constant(a) {
