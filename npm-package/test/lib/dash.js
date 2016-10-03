@@ -4,15 +4,18 @@ const {
   compose,
   constant,
   curry,
+  groupBy,
   identity,
   map,
+  prop,
+  reduce,
 } = require('../../lib/dash');
 const test = require('tape');
 
 const add = curry((a, b, c = 0) => a + b + c);
 const inc = add(1);
 
-test.only('compose', t => {
+test('compose', t => {
   t.equal(compose()(5), 5);
   t.equal(compose(add)(5, 1), 6);
   t.equal(compose(identity)(5), 5);
@@ -36,7 +39,29 @@ test('curry', t => {
   t.end();
 });
 
+test('groupBy', t => {
+  t.deepEqual(groupBy(Math.round, [1, 1.5, 2.5, 2, 3]), {
+    1: [1],
+    2: [2, 1.5],
+    3: [3, 2.5],
+  });
+  t.end();
+});
+
 test('map', t => {
   t.deepEqual(map(inc, [1, 2, 3]), [2, 3, 4]);
+  t.deepEqual(map(inc, {a: 1, b: 2, c: 3}), [2, 3, 4]);
+  t.end();
+});
+
+test('prop', t => {
+  t.equal(prop('a', {a: 5}), 5);
+  t.equal(prop('a')({a: 5}), 5);
+  t.end();
+});
+
+test('reduce', t => {
+  t.deepEqual(reduce(add, 0, [1, 2, 3]), 6);
+  t.deepEqual(reduce(add, 0, {a: 1, b: 2, c: 3}), 6);
   t.end();
 });
