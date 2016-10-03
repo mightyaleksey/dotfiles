@@ -14,7 +14,13 @@
     }
   },
   "rules": {
-    "array-bracket-spacing": ["off"],
+    "array-bracket-spacing": [
+      "off"
+    ],
+    "comma-dangle": [
+      "error",
+      "always-multiline"
+    ],
     "comma-spacing": [
       "error",
       {
@@ -22,9 +28,18 @@
         "before": false
       }
     ],
-    "computed-property-spacing": ["error", "never"],
-    "eol-last": ["error", "always"],
-    "indent": ["error", 2],
+    "computed-property-spacing": [
+      "error",
+      "never"
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "indent": [
+      "error",
+      2
+    ],
     "keyword-spacing": [
       "error",
       {
@@ -32,12 +47,16 @@
         "before": true
       }
     ],
-    "linebreak-style": ["error", "unix"],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
     "max-len": [
       "error",
       {
         "code": 80,
         "ignoreComments": true,
+        "ignoreStrings": true,
         "ignoreUrls": true
       }
     ],
@@ -50,9 +69,17 @@
         "maxEOF": 1
       }
     ],
-    "object-curly-spacing": ["off"],
-    "quotes": ["error", "single"],
-    "semi": ["error", "always"],
+    "object-curly-spacing": [
+      "off"
+    ],
+    "quotes": [
+      "error",
+      "single"
+    ],
+    "semi": [
+      "error",
+      "always"
+    ],
     "prefer-const": "error",
     "space-before-function-paren": [
       "error",
