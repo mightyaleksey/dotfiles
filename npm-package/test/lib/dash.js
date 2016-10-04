@@ -30,6 +30,8 @@ test('constant', t => {
 });
 
 test('curry', t => {
+  const add = curry((a, b, c = 0) => a + b + c);
+
   t.equal(add(1)(2), 3);
   t.equal(add(1, 2), 3);
   t.equal(add(1)()(2), 3);
@@ -40,10 +42,10 @@ test('curry', t => {
 });
 
 test('groupBy', t => {
-  t.deepEqual(groupBy(Math.round, [1, 1.5, 2.5, 2, 3]), {
+  t.deepEqual(groupBy(Math.round, [1, 3.2, 1.5, 2, 3]), {
     1: [1],
-    2: [2, 1.5],
-    3: [3, 2.5],
+    2: [1.5, 2],
+    3: [3.2, 3],
   });
   t.end();
 });
@@ -62,6 +64,5 @@ test('prop', t => {
 
 test('reduce', t => {
   t.deepEqual(reduce(add, 0, [1, 2, 3]), 6);
-  t.deepEqual(reduce(add, 0, {a: 1, b: 2, c: 3}), 6);
   t.end();
 });

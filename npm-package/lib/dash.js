@@ -71,8 +71,9 @@ function identity(a) {
 // map :: (a -> b) -> [a] -> [b]
 function map(f, c) {
   if (isArray(c)) {
-    const nC = Array(c.length);
-    for (var i = c.length; i--;) nC[i] = f(c[i]);
+    const length = c.length;
+    const nC = Array(length);
+    for (var i = 0; i < length; ++i) nC[i] = f(c[i]);
     return nC;
   }
 
@@ -91,7 +92,8 @@ function reduce(f, acc, c) {
   var nC = acc;
 
   if (isArray(c)) {
-    for (var i = c.length; i--;) nC = f(nC, c[i]);
+    const length = c.length;
+    for (var i = 0; i < length; ++i) nC = f(nC, c[i]);
     return nC;
   }
 
