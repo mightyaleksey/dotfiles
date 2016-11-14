@@ -9,3 +9,8 @@
 
 # For example, z foo bar would match /foo/bar but not /bar/foo.
 . `brew --prefix`/etc/profile.d/z.sh
+
+# Simple shortcut for the static server
+www() {
+  python -m SimpleHTTPServer ${1:-8080}
+}
