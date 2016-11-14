@@ -1,12 +1,18 @@
 'use strict';
 
 const {
+  assign,
   compose,
   constant,
   curry,
   groupBy,
   identity,
+  invert,
+  isArray,
+  isUndefined,
   map,
+  negate,
+  omit,
   prop,
   reduce,
 } = require('../../lib/dash');
@@ -14,6 +20,17 @@ const test = require('tape');
 
 const add = curry((a, b, c = 0) => a + b + c);
 const inc = add(1);
+
+test('assign', t => {
+  const a = {a: 4, c: 7};
+  const b = {a: 5, b: 6};
+  const c = assign(a, b);
+
+  t.notEqual(a, c);
+  t.notEqual(b, c);
+  t.deepEqual(c, {a: 5, b: 6, c: 7});
+  t.end();
+});
 
 test('compose', t => {
   t.equal(compose()(5), 5);
@@ -50,9 +67,38 @@ test('groupBy', t => {
   t.end();
 });
 
+test('invert', t => {
+  t.deepEqual(invert(['a', 'b']), {a: '0', b: '1'});
+  t.deepEqual(invert({a: 'b'}), {b: 'a'});
+  t.end();
+});
+
+test('isArray', t => {
+  t.ok(isArray([]));
+  t.notOk(isArray({}));
+  t.end();
+});
+
+test('isUndefined', t => {
+  t.ok(isUndefined(void 0));
+  t.notOk(isUndefined(''));
+  t.end();
+});
+
 test('map', t => {
   t.deepEqual(map(inc, [1, 2, 3]), [2, 3, 4]);
   t.deepEqual(map(inc, {a: 1, b: 2, c: 3}), [2, 3, 4]);
+  t.end();
+});
+
+test('negate', t => {
+  t.ok(negate(constant())());
+  t.end();
+});
+
+test('omit', t => {
+  t.deepEqual(omit(['a', 'b'], {b: 3, c: 0, d: false}), {c: 0, d: false});
+  t.deepEqual(omit(['a', 'b'])({b: 3, c: 0, d: false}), {c: 0, d: false});
   t.end();
 });
 

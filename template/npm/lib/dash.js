@@ -2,22 +2,48 @@
 
 const isArray = Array.isArray;
 
+exports.assign = curry(assign);
 exports.compose = compose;
 exports.constant = constant;
 exports.curry = curry;
 exports.groupBy = curry(groupBy);
 exports.identity = identity;
+exports.invert = invert;
 exports.isArray = isArray;
+exports.isUndefined = isUndefined;
 exports.map = curry(map);
+exports.negate = negate;
+exports.omit = curry(omit);
 exports.prop = curry(prop);
 exports.reduce = curry(reduce);
 exports.trace = trace;
 
+// assign :: a -> b -> c
+function assign(a, b) {
+  const c = {};
+  _copy(c, a);
+  _copy(c, b);
+  return c;
+}
+
+// _copy :: a -> b -> a
+function _copy(a = {}, b = {}) {
+  const keys = Object.keys(b);
+  const length = keys.length;
+
+  for (var j = 0; j < length; ++j) {
+    const key = keys[j];
+    a[key] = b[key];
+  }
+
+  return a;
+}
+
 function compose(...fn) {
   const quantity = fn.length;
-  return composition;
+  return _compose;
 
-  function composition() {
+  function _compose() {
     var index = quantity - 1;
     var result = quantity
       ? fn[index].apply(this, arguments)
@@ -68,6 +94,24 @@ function identity(a) {
   return a;
 }
 
+// invert :: {a: b} -> {b: a}
+function invert(c) {
+  const keys = Object.keys(c);
+  const nC = {};
+
+  for (var j = 0; j < keys.length; ++j) {
+    const key = keys[j];
+    nC[c[key]] = key;
+  }
+
+  return nC;
+}
+
+// isUndefined :: a -> bool
+function isUndefined(a) {
+  return a === undefined;
+}
+
 // map :: (a -> b) -> [a] -> [b]
 function map(f, c) {
   if (isArray(c)) {
@@ -77,8 +121,34 @@ function map(f, c) {
     return nC;
   }
 
-  const nC = [];
-  for (var k in c) if (c.hasOwnProperty(k)) nC.push(f(c[k]));
+  const keys = Object.keys(c);
+  const length = keys.length;
+  const nC = Array(length);
+
+  for (var j = 0; j < length; ++j) nC[j] = f(c[keys[j]]);
+  return nC;
+}
+
+// negate :: (a -> b) -> !b
+function negate(f) {
+  return _negate;
+
+  function _negate() {
+    return !f.apply(this, arguments);
+  }
+}
+
+// omit :: [a] -> {a} -> {};
+function omit(props, c) {
+  const keys = Object.keys(c);
+  const list = invert(props);
+  const nC = {};
+
+  for (var j = 0; j < keys.length; ++j) {
+    const key = keys[j];
+    if (!list.hasOwnProperty(key)) nC[key] = c[key];
+  }
+
   return nC;
 }
 
@@ -97,7 +167,10 @@ function reduce(f, acc, c) {
     return nC;
   }
 
-  for (var k in c) nC = f(nC, c[k]);
+  const keys = Object.keys(c);
+  const length = keys.length;
+
+  for (var j = 0; j < length; ++j) nC = f(nC, c[keys[j]]);
   return nC;
 }
 
