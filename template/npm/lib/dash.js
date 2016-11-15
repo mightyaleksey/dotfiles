@@ -3,13 +3,17 @@
 const isArray = Array.isArray;
 
 exports.assign = curry(assign);
+exports.castArray = castArray;
 exports.compose = compose;
 exports.constant = constant;
 exports.curry = curry;
+exports.filter = curry(filter);
+exports.first = first;
 exports.groupBy = curry(groupBy);
 exports.identity = identity;
 exports.invert = invert;
 exports.isArray = isArray;
+exports.isString = isString;
 exports.isUndefined = isUndefined;
 exports.map = curry(map);
 exports.negate = negate;
@@ -37,6 +41,13 @@ function _copy(a = {}, b = {}) {
   }
 
   return a;
+}
+
+// castArray :: a -> [a]
+function castArray(a) {
+  if (isArray(a)) return a;
+  if (arguments.length === 0) return [];
+  return [a];
 }
 
 function compose(...fn) {
@@ -74,6 +85,19 @@ function curry(f) {
   }
 }
 
+// filter :: (a -> bool) -> [a] -> []
+function filter(f, c) {
+  return reduce((nC, a) => {
+    if (f(a)) nC.push(a);
+    return nC;
+  }, [], c);
+}
+
+// first :: [a] -> a
+function first(a) {
+  return a[0];
+}
+
 // groupBy :: (b -> a) -> [a] -> b
 function groupBy(identity, c) {
   return reduce((acc, a) => {
@@ -105,6 +129,11 @@ function invert(c) {
   }
 
   return nC;
+}
+
+// isString :: a -> bool
+function isString(a) {
+  return typeof a === 'string';
 }
 
 // isUndefined :: a -> bool

@@ -2,13 +2,17 @@
 
 const {
   assign,
+  castArray,
   compose,
   constant,
   curry,
+  filter,
+  first,
   groupBy,
   identity,
   invert,
   isArray,
+  isString,
   isUndefined,
   map,
   negate,
@@ -29,6 +33,16 @@ test('assign', t => {
   t.notEqual(a, c);
   t.notEqual(b, c);
   t.deepEqual(c, {a: 5, b: 6, c: 7});
+  t.end();
+});
+
+test('castArray', t => {
+  const a = [];
+  t.equal(castArray(a), a);
+  t.notEqual(castArray([5]), [5]);
+  t.deepEqual(castArray(void 0), [void 0]);
+  t.deepEqual(castArray(null), [null]);
+  t.deepEqual(castArray(), []);
   t.end();
 });
 
@@ -58,6 +72,18 @@ test('curry', t => {
   t.end();
 });
 
+test('filter', t => {
+  const a = [0, 1, null, 2, 3];
+  t.notEqual(filter(Boolean, a), a);
+  t.deepEqual(filter(Boolean, a), [1, 2, 3]);
+  t.end();
+});
+
+test('first', t => {
+  t.equal(first([5]), 5);
+  t.end();
+});
+
 test('groupBy', t => {
   t.deepEqual(groupBy(Math.round, [1, 3.2, 1.5, 2, 3]), {
     1: [1],
@@ -76,6 +102,12 @@ test('invert', t => {
 test('isArray', t => {
   t.ok(isArray([]));
   t.notOk(isArray({}));
+  t.end();
+});
+
+test('isString', t => {
+  t.ok(isString(''));
+  t.notOk(isString(0));
   t.end();
 });
 
