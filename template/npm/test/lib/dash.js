@@ -12,10 +12,12 @@ const {
   identity,
   invert,
   isArray,
+  isFunction,
   isString,
   isUndefined,
   map,
   negate,
+  noop,
   omit,
   prop,
   reduce,
@@ -105,6 +107,12 @@ test('isArray', t => {
   t.end();
 });
 
+test('isFunction', t => {
+  t.ok(isFunction(() => {}));
+  t.notOk(isFunction(void 0));
+  t.end();
+});
+
 test('isString', t => {
   t.ok(isString(''));
   t.notOk(isString(0));
@@ -125,6 +133,11 @@ test('map', t => {
 
 test('negate', t => {
   t.ok(negate(constant())());
+  t.end();
+});
+
+test('noop', t => {
+  t.equal(noop(), void 0);
   t.end();
 });
 

@@ -13,10 +13,12 @@ exports.groupBy = curry(groupBy);
 exports.identity = identity;
 exports.invert = invert;
 exports.isArray = isArray;
+exports.isFunction = isFunction;
 exports.isString = isString;
 exports.isUndefined = isUndefined;
 exports.map = curry(map);
 exports.negate = negate;
+exports.noop = noop;
 exports.omit = curry(omit);
 exports.prop = curry(prop);
 exports.reduce = curry(reduce);
@@ -131,6 +133,11 @@ function invert(c) {
   return nC;
 }
 
+// isFunction :: a -> bool
+function isFunction(a) {
+  return typeof a === 'function';
+}
+
 // isString :: a -> bool
 function isString(a) {
   return typeof a === 'string';
@@ -166,6 +173,9 @@ function negate(f) {
     return !f.apply(this, arguments);
   }
 }
+
+// noop :: a -> undefined
+function noop() {}
 
 // omit :: [a] -> {a} -> {};
 function omit(props, c) {
@@ -205,6 +215,6 @@ function reduce(f, acc, c) {
 
 // trace :: a -> a
 function trace(a) {
-  console.log(a);
+  console.log(a); // eslint-disable-line no-console
   return a;
 }
