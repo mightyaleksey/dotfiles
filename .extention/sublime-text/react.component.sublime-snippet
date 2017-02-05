@@ -1,0 +1,17 @@
+<snippet>
+  <content><![CDATA[
+import React, {PropTypes} from 'react';
+
+function ${1:${TM_FILENAME/(.+)\..+/$1/}}() {
+  return ${0:null};
+}
+
+${1:$TM_FILENAME}.defaultProps = {};
+
+${1:$TM_FILENAME}.propTypes = {};
+
+export default ${1:$TM_FILENAME};
+]]></content>
+  <tabTrigger>rc</tabTrigger>
+  <scope>source.js</scope>
+</snippet>

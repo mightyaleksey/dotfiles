@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+module.exports = ${1:${TM_FILENAME/(.+)\..+/$1/}};${0}
+]]></content>
+  <description>module.exports</description>
+  <scope>source.js</scope>
+  <tabTrigger>mod</tabTrigger>
+</snippet>
