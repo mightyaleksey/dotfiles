@@ -24,7 +24,7 @@ What can I say? Simple, performant and flexible. In case you are interested, see
 ```
 
 
-#### Package Control
+#### Package Control: List Packages
 
 * [Babel](https://packagecontrol.io/packages/Babel)
 * [Oceanic Next Color Scheme](https://packagecontrol.io/packages/Oceanic%20Next%20Color%20Scheme)
