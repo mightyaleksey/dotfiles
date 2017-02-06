@@ -7,9 +7,10 @@ COLOR_GREEN='\033[0;32m'
 COLOR_LIGHT_GRAY='\033[0;37m'
 COLOR_BOLD='\033[1m'
 
+# oh-my-zsh installation directory
 omzh_dir=~/.oh-my-zsh
 
-# plugin_file -> plugin_name
+# update_plugin :: plugin_file -> plugin_name
 update_plugin() {
   mkdir -p ${omzh_dir}/custom/plugins/${2}
   cp ".extention/oh-my-zsh/${1}" "${omzh_dir}/custom/plugins/${2}/${1}"
@@ -30,8 +31,10 @@ else
 fi
 
 
+# sublime text installation directory
 st_dir=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
+# update_package :: package_file
 update_package() {
   cp ".extention/sublime-text/${1}" "${st_dir}/${1}"
 
