@@ -1,0 +1,10 @@
+<snippet>
+  <content><![CDATA[
+const {${1}} = css`
+  ${2}
+`;${0}
+]]></content>
+  <description>css literal</description>
+  <scope>source.js</scope>
+  <tabTrigger>css</tabTrigger>
+</snippet>
