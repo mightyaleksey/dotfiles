@@ -1,6 +1,10 @@
 <snippet>
   <content><![CDATA[
-module.exports = ${1:${TM_FILENAME/(.+)\..+/$1/}};${0}
+module.exports = ${1:${TM_FILENAME/(.+)\..+/$1/}};
+
+function ${1:$TM_FILENAME}() {
+  ${0}
+}
 ]]></content>
   <description>module.exports</description>
   <scope>source.js</scope>
