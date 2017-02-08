@@ -1,0 +1,10 @@
+<snippet>
+  <content><![CDATA[
+test('${1}', () => {
+  ${0}
+});
+]]></content>
+  <description>test()</description>
+  <scope>source.js</scope>
+  <tabTrigger>ts</tabTrigger>
+</snippet>

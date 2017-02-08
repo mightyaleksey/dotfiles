@@ -1,0 +1,10 @@
+<snippet>
+  <content><![CDATA[
+propTypes = {
+  ${0}
+};
+]]></content>
+  <description>propTypes { ... }</description>
+  <tabTrigger>pt</tabTrigger>
+  <scope>source.js</scope>
+</snippet>
