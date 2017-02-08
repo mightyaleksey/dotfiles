@@ -13,7 +13,7 @@ omzh_dir=~/.oh-my-zsh
 # update_plugin :: plugin_file -> plugin_name
 update_plugin() {
   mkdir -p ${omzh_dir}/custom/plugins/${2}
-  cp ".extention/oh-my-zsh/${1}" "${omzh_dir}/custom/plugins/${2}/${1}"
+  cp "extention/oh-my-zsh/${1}" "${omzh_dir}/custom/plugins/${2}/${1}"
 
   echo "${COLOR_LIGHT_GRAY}~/.oh-my-zsh/custom/plugins/${2}/${1} ${COLOR_GREEN}done${COLOR_NC}"
 }
@@ -21,7 +21,7 @@ update_plugin() {
 if [ -d "$omzh_dir" ]; then
   echo 'updating oh-my-zsh plugins'
 
-  for plugin_file in `ls .extention/oh-my-zsh`; do
+  for plugin_file in `ls extention/oh-my-zsh`; do
     plugin_name=`echo $plugin_file|cut -d. -f1`
     update_plugin $plugin_file $plugin_name
   done
@@ -36,7 +36,7 @@ st_dir=~/Library/Application\ Support/Sublime\ Text\ 3/Packages/User
 
 # update_package :: package_file
 update_package() {
-  cp ".extention/sublime-text/${1}" "${st_dir}/${1}"
+  cp "extention/sublime-text/${1}" "${st_dir}/${1}"
 
   echo "${COLOR_LIGHT_GRAY}Packages/User/${1} ${COLOR_GREEN}done${COLOR_NC}"
 }
@@ -44,7 +44,7 @@ update_package() {
 if [ -d "$st_dir" ]; then
   echo 'updating sublime text packages'
 
-  for package_file in `ls .extention/sublime-text`; do
+  for package_file in `ls extention/sublime-text`; do
     update_package $package_file
   done
 else
