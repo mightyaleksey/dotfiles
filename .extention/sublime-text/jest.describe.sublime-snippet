@@ -6,5 +6,5 @@ describe('${1}', () => {
 ]]></content>
   <description>describe()</description>
   <scope>source.js</scope>
-  <tabTrigger>desc</tabTrigger>
+  <tabTrigger>ds</tabTrigger>
 </snippet>

@@ -8,5 +8,5 @@ function ${1:$TM_FILENAME}() {
 ]]></content>
   <description>module.exports</description>
   <scope>source.js</scope>
-  <tabTrigger>mod</tabTrigger>
+  <tabTrigger>md</tabTrigger>
 </snippet>
