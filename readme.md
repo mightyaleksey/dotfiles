@@ -29,6 +29,7 @@ What can I say? Simple, performant and flexible. In case you are interested, see
 * [Babel](https://packagecontrol.io/packages/Babel)
 * [Oceanic Next Color Scheme](https://packagecontrol.io/packages/Oceanic%20Next%20Color%20Scheme)
 * [Dockerfile Syntax Highlighting](https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting)
+* [FlowIDE](https://packagecontrol.io/packages/FlowIDE)
 * [Editor Config](https://packagecontrol.io/packages/EditorConfig)
 * [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview)
 * [Shell Script Improved](https://packagecontrol.io/packages/ShellScriptImproved)
