@@ -1,0 +1,17 @@
+<snippet>
+  <content><![CDATA[
+const {PropTypes} = require('react');
+const React = require('react');
+
+function ${1:${TM_FILENAME/(.+)\..+/$1/:Component}}() {
+  return ${0:null};
+}
+
+${1:$TM_FILENAME}.propTypes = {};
+
+module.exports = ${1:$TM_FILENAME};
+]]></content>
+  <description>Functional Component with require</description>
+  <tabTrigger>rcfr</tabTrigger>
+  <scope>source.js</scope>
+</snippet>
