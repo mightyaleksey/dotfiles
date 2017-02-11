@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+PropTypes.object,${0}
+]]></content>
+  <description>PropTypes.object</description>
+  <tabTrigger>pto</tabTrigger>
+  <scope>source.js</scope>
+</snippet>
