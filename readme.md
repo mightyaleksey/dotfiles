@@ -4,6 +4,14 @@ dotfiles
 My environment configuration.
 
 
+## Structure
+
+```
+script
+├── est.sh - interpolates the things.
+└── update.sh - copies the omz plugins and sublime snippets and prefs.
+```
+
 ## Notes
 
 
