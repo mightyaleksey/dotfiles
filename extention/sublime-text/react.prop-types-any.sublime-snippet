@@ -1,0 +1,8 @@
+<snippet>
+  <content><![CDATA[
+PropTypes.any,${0}
+]]></content>
+  <description>PropTypes.any</description>
+  <tabTrigger>pty</tabTrigger>
+  <scope>source.js</scope>
+</snippet>
