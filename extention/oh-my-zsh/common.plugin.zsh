@@ -15,5 +15,5 @@ www() {
   python -m SimpleHTTPServer ${1:-8080}
 }
 
-# atom
-alias a='atom -a .'
+# sublime text
+alias a='st -a .'
