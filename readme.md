@@ -24,6 +24,8 @@ Personally, I'm a fan of this framework. It has flexible [plugin](https://github
 
 What can I say? Simple, performant and flexible. In case you are interested, see a small list of settings of mine below.
 
+[Preferences example](extention/sublime-text/Preferences.sublime-settings).
+
 
 #### Key Bindings
 
