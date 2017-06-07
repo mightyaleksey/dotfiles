@@ -1,17 +1,44 @@
 {
-	"color_scheme": "Packages/User/SublimeLinter/Oceanic Next (SL).tmTheme",
-	"ensure_newline_at_eof_on_save": true,
-	"folder_exclude_patterns":
-	[
-		".git",
+  "binary_file_patterns":
+  [
+    ".git/",
+    "node_modules/"
+  ],
+  "color_scheme": "Packages/User/SublimeLinter/Oceanic Next (SL).tmTheme",
+  "draw_white_space": "all",
+  "enable_tab_scrolling": false,
+  "ensure_newline_at_eof_on_save": true,
+  "folder_exclude_patterns":
+  [
+    ".git"
+  ],
+  "font_face": "Menlo",
+  "font_size": 15,
+  "ignored_packages":
+  [
+    "Vintage"
+  ],
+  "indent_guide_options":
+  [
+    "draw_normal"
+  ],
+  "index_exclude_patterns":
+  [
+    ".git",
     "node_modules"
-	],
-	"font_size": 16,
-	"ignored_packages":
-	[
-		"Vintage"
-	],
-	"index_workers": 0,
-	"tab_size": 2,
-	"translate_tabs_to_spaces": true
+  ],
+  "index_workers": 0,
+  "line_padding_bottom": 2,
+  "line_padding_top": 2,
+  "tab_size": 2,
+  "theme": "ayu-mirage.sublime-theme",
+  "translate_tabs_to_spaces": true,
+  "trim_trailing_white_space_on_save": true,
+  "ui_big_tabs": false,
+  "ui_fix_tab_labels": true,
+  "ui_font_size_small": false,
+  "ui_font_source_code_pro": true,
+  "ui_separator": false,
+  "ui_sidebar_highlight_row": false,
+  "ui_wide_scrollbars": false
 }
