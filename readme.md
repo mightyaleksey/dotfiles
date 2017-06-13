@@ -41,6 +41,7 @@ What can I say? Simple, performant and flexible. In case you are interested, see
 * [Oceanic Next Color Scheme](https://packagecontrol.io/packages/Oceanic%20Next%20Color%20Scheme) — JavaScript color scheme.
 * [Dockerfile Syntax Highlighting](https://packagecontrol.io/packages/Dockerfile%20Syntax%20Highlighting) — Dockerfile syntax support.
 * [Editor Config](https://packagecontrol.io/packages/EditorConfig)
+* [GitGutter](https://packagecontrol.io/packages/GitGutter) — Shows Git-related information.
 * [Markdown Preview](https://packagecontrol.io/packages/Markdown%20Preview)
 * [Nginx](https://packagecontrol.io/packages/nginx) — Nginx syntax support.
 * [Pretty JSON](https://packagecontrol.io/packages/Pretty%20JSON)
