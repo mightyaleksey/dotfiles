@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-PropTypes.shape({${1}}),${0}
-]]></content>
-  <description>PropTypes.shape</description>
-  <tabTrigger>ptp</tabTrigger>
-  <scope>source.js</scope>
-</snippet>

@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-exports.${1} = ${1};${0}
-]]></content>
-  <description>exports</description>
-  <scope>source.js</scope>
-  <tabTrigger>xr</tabTrigger>
-</snippet>

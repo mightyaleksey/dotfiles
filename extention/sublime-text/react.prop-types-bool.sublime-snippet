@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-PropTypes.bool,${0}
-]]></content>
-  <description>PropTypes.bool</description>
-  <tabTrigger>ptb</tabTrigger>
-  <scope>source.js</scope>
-</snippet>

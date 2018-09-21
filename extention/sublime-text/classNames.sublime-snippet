@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-import classNames from 'classnames';${0}
-]]></content>
-  <description>import classNames</description>
-  <scope>source.js</scope>
-  <tabTrigger>cn</tabTrigger>
-</snippet>

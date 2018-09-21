@@ -20,11 +20,12 @@
 # Inside double quotes, double quote " and backslash \ characters must be escaped: use \" for " and \\ for \.
 
 [user]
-  name = ${name}
-  email = ${email}
+  name = Alexey Litvinov
+  email = iamhoneyboy@gmail.com
 
 [core]
   editor = /usr/bin/vim
+  ignorecase = false
 
 [push]
   default = upstream
