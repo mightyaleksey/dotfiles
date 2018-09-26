@@ -1,7 +1,0 @@
-.editorconfig
-.eslintrc.json
-.gitignore
-.npmignore
-.travis.yml
-test
-yarn.lock

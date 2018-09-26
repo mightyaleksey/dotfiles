@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-PropTypes.func,${0}
-]]></content>
-  <description>PropTypes.func</description>
-  <tabTrigger>ptf</tabTrigger>
-  <scope>source.js</scope>
-</snippet>

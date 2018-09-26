@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-expect(${1})${0}
-]]></content>
-  <description>expect()</description>
-  <scope>source.js</scope>
-  <tabTrigger>xp</tabTrigger>
-</snippet>

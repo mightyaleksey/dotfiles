@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-PropTypes.node,${0}
-]]></content>
-  <description>PropTypes.node</description>
-  <tabTrigger>ptd</tabTrigger>
-  <scope>source.js</scope>
-</snippet>

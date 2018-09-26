@@ -1,8 +1,0 @@
-<snippet>
-  <content><![CDATA[
-import ${2:${1}} from '${1:moduleName}';${0}
-]]></content>
-  <description>import</description>
-  <scope>source.js</scope>
-  <tabTrigger>rt</tabTrigger>
-</snippet>
