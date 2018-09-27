@@ -1,7 +1,17 @@
+;; with iTerm2 (default light background) it looks pretty
+(load-theme 'leuven)
+
 (menu-bar-mode -1)
 ;; gnu
-(toggle-scroll-bar -1)
-(tool-bar-mode -1)
+(when (display-graphic-p)
+  (toggle-scroll-bar -1)
+  (tool-bar-mode -1))
+
+(set-face-attribute 'default nil
+                    :family "Meslo LG S"
+                    :height 160
+                    :weight 'normal
+                    :width 'normal)
 
 ;; show columns in status bar
 (column-number-mode)
@@ -39,9 +49,6 @@
   (transpose-lines 1)
   (forward-line -1)
   (indent-according-to-mode))
-
-;; with iTerm2 (default light background) it looks pretty
-(load-theme 'leuven)
 
 ;;(load "~/.emacs.d/packages.el")
 (run-with-idle-timer 0 nil #'load "~/.emacs.d/packages.el")

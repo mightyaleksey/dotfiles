@@ -25,6 +25,7 @@
 
 (use-package ivy
   :config
+  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (ivy-mode 1))
 
 (use-package js2-mode
