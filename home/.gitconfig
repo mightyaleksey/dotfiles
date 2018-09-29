@@ -24,7 +24,7 @@
   email = iamhoneyboy@gmail.com
 
 [core]
-  editor = /usr/bin/vim
+  editor = emacs -nw
   ignorecase = false
 
 [push]
