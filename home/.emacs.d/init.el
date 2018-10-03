@@ -27,7 +27,7 @@
   (define-prefix-command 'my-goto-anything-keymap)
   (define-key my-goto-anything-keymap (kbd "d") 'my-previous-word-at-point)
   (define-key my-goto-anything-keymap (kbd "f") 'my-next-word-at-point)
-  (define-key my-goto-anything-keymap (kbd "g") 'dumb-jump-go)
+  (define-key my-goto-anything-keymap (kbd "g") 'find-file-in-project-at-point)
   (define-key xah-fly-leader-key-map (kbd ".") my-goto-anything-keymap)
   (global-set-key (kbd "<home>") 'xah-fly-command-mode-activate-no-hook))
 (use-package which-key
@@ -46,14 +46,17 @@
   (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
   (ivy-mode 1))
 
-(use-package dumb-jump
-  :ensure t)
+(defun my-find-file-in-project ()
+  "Same as `find-file-in-project`, except avoids search in the home directory."
+  (interactive)
+  (if (equal (ffip-get-project-root-directory) "~/")
+      (message "Since project directory is `~/`, use open-file.")
+    (find-file-in-project)))
 
-(use-package projectile
+(use-package find-file-in-project
   :ensure t
   :config
-  (add-to-list 'projectile-globally-ignored-directories "node_modules")
-  (global-set-key (kbd "C-p") 'project-find-file))
+  (global-set-key (kbd "C-p") 'my-find-file-in-project))
 
 (use-package neotree
   :ensure t
