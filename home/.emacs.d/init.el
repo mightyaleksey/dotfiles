@@ -287,7 +287,9 @@ Modified version 2017-01-21"
 (use-package ivy
   :ensure t
   :init
-  (setq ivy-re-builders-alist '((t . ivy--regex-fuzzy)))
+  (setq ivy-extra-directories nil)
+  (setq ivy-re-builders-alist '((read-file-name-internal . ivy--regex-plus)
+                                (t . ivy--regex-fuzzy)))
   (ivy-mode 1))
 
 (use-package find-file-in-project
@@ -371,6 +373,9 @@ Modified version 2017-01-21"
   (define-key neotree-mode-map (kbd "т") nil)
   (global-set-key (kbd "C-и") 'neotree-project-dir-toggle))
 
+(use-package css-mode
+  :mode ("\\.styl$" . css-mode))
+
 (use-package js2-mode
   :ensure t
   :init
@@ -384,6 +389,13 @@ Modified version 2017-01-21"
 
 (use-package pug-mode
   :ensure t)
+
+(use-package linum
+  :init
+  (setq linum-format " %d ")
+  :hook ((css-mode . linum-mode)
+         (elisp-mode . linum-mode)
+         (js-mode . linum-mode)))
 
 (use-package github-modern-theme
   :ensure t
@@ -433,7 +445,6 @@ Modified version 2017-01-21"
 
 (setq inhibit-startup-screen t)
 (column-number-mode)
-(global-linum-mode)
 
 (setq require-final-newline t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
