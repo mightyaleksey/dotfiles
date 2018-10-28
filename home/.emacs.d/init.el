@@ -360,7 +360,7 @@ Modified version 2017-01-21"
   (define-key neotree-mode-map (kbd "C-n") nil)
   (define-key neotree-mode-map (kbd "p") nil)
   (define-key neotree-mode-map (kbd "n") nil)
-  (global-set-key (kbd "C-b") 'neotree-project-dir-toggle)
+  (global-set-key (kbd "C-b") 'neotree-project-dir)
 
   ;; russian analog
   (define-key neotree-mode-map (kbd "л") 'neotree-next-line)
@@ -371,7 +371,7 @@ Modified version 2017-01-21"
   (define-key neotree-mode-map (kbd "C-т") nil)
   (define-key neotree-mode-map (kbd "з") nil)
   (define-key neotree-mode-map (kbd "т") nil)
-  (global-set-key (kbd "C-и") 'neotree-project-dir-toggle))
+  (global-set-key (kbd "C-и") 'neotree-project-dir))
 
 (use-package css-mode
   :mode ("\\.styl$" . css-mode))
@@ -379,8 +379,8 @@ Modified version 2017-01-21"
 (use-package js2-mode
   :ensure t
   :init
-  (add-hook 'js-mode-hook 'js2-minor-mode)
-  (setq js2-bounce-indent-p t))
+  (setq-default js-indent-align-list-continuation nil)
+  (add-hook 'js-mode-hook 'js2-minor-mode))
 
 (use-package rjsx-mode
   :ensure t
@@ -389,6 +389,11 @@ Modified version 2017-01-21"
 
 (use-package pug-mode
   :ensure t)
+
+(use-package editorconfig
+  :ensure t
+  :config
+  (editorconfig-mode 1))
 
 (use-package linum
   :init
