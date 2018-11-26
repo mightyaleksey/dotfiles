@@ -380,7 +380,16 @@ Modified version 2017-01-21"
   :ensure t
   :init
   (setq-default js-indent-align-list-continuation nil)
-  (add-hook 'js-mode-hook 'js2-minor-mode))
+  (add-hook 'js-mode-hook 'js2-minor-mode)
+  :config
+  (defun js--multi-line-declaration-indentation ()
+    "Override the default function `js--multi-line-declaration-indentation',
+which is a helper for the multiline variable declaration.
+The default behavior spoils indentation for the beggining of chain
+on the second line in expression. Since usage of multiline variable declaration
+is unpopular nowadays (it produces additional diffs in case you need to add or remove smthing),
+turn off indentation support for it."
+    nil))
 
 (use-package rjsx-mode
   :ensure t
@@ -449,6 +458,9 @@ Modified version 2017-01-21"
   (setq-default line-spacing 2))
 
 (setq inhibit-startup-screen t)
+(setq make-backup-files nil) ; stop creating backup~ files
+(setq auto-save-default nil) ; stop creating #autosave# files
+(setq create-lockfiles nil)
 (column-number-mode)
 
 (setq require-final-newline t)
