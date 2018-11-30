@@ -255,13 +255,9 @@ Modified version 2017-01-21"
   (xah-fly--define-keys
    (define-prefix-command 'my-goto-anything-keymap)
    '(
-     ("e" . my-previous-word-at-point) ; d
-     ("u" . my-next-word-at-point) ; f
      ("i" . find-file-in-project-at-point) ; g
 
      ;; russian analog
-     ("в" . my-previous-word-at-point)
-     ("а" . my-next-word-at-point)
      ("п" . find-file-in-project-at-point)))
 
   (xah-fly--define-keys
@@ -272,6 +268,9 @@ Modified version 2017-01-21"
 
      ;; russian analog
      ("ю" . my-goto-anything-keymap)))
+
+  (global-set-key (kbd "M-p") 'my-previous-word-at-point)
+  (global-set-key (kbd "M-n") 'my-next-word-at-point)
 
   (global-set-key (kbd "<home>") 'xah-fly-command-mode-activate-no-hook))
 (use-package which-key
