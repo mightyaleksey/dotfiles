@@ -1,22 +1,73 @@
+(setq startup-time (current-time))
+
+(add-hook 'after-init-hook
+          (lambda ()
+            (setq elapsed-time (float-time (time-subtract (current-time) startup-time)))))
+
+(defun display-startup-echo-area-message ()
+  (message "Loaded in %.3fs" elapsed-time))
+
+
+(menu-bar-mode -1)
+(when (display-graphic-p)
+  (toggle-scroll-bar -1)
+  (tool-bar-mode -1)
+  (set-face-attribute 'default nil
+                      :family "Meslo LG S"
+                      :height 140
+                      :weight 'normal
+                      :width 'normal)
+  (setq-default line-spacing 2))
+
+(column-number-mode)
+
+
 (require 'package)
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
-(package-initialize)
+
+(setq inhibit-startup-screen t
+      make-backup-files nil ; stop creating backup~ files
+      auto-save-default nil ; stop creating #autosave# files
+      create-lockfiles nil
+      package-archives
+      '(("gnu"          . "http://elpa.gnu.org/packages/")
+        ("melpa"        . "http://melpa.org/packages/")
+        ("melpa-stable" . "http://stable.melpa.org/packages/"))
+      package-archive-priorities
+      '(("gnu" . 0)
+        ("melpa" . 5)
+        ("melpa-stable" . 10))
+      package-enable-at-startup nil)
+
+(package-initialize nil)
+
+
+(defun my-auto-package-refresh-contents (&rest args)
+  (package-refresh-contents)
+  (advice-remove 'package-install 'my-auto-package-refresh-contents))
+
+(advice-add 'package-install :before 'my-auto-package-refresh-contents)
+
 
 (unless (package-installed-p 'use-package)
-  (package-refresh-contents)
+  (message "EMACS install use-package")
   (package-install 'use-package))
 
 (require 'use-package)
-;;; http://ergoemacs.org/misc/qwerty_dvorak_table.html
-(use-package xah-fly-keys
-  :ensure t
-  :config
-  ;; dvorak-qwerty keymap
-  ;; http://ergoemacs.org/misc/qwerty_dvorak_table.html
-  (xah-fly-keys-set-layout "qwerty")
-  (xah-fly-keys 1)
+(setq use-package-always-ensure t)
 
+
+(defun qwerty--define-keys (@keymap-name @key-cmd-alist)
+  (interactive)
+  (mapc
+   (lambda ($pair)
+     (define-key @keymap-name (kbd (car $pair)) (cdr $pair)))
+   @key-cmd-alist))
+
+
+(use-package xah-fly-keys
+  :init
+  (setq xah-fly-use-control-key nil)
+  :config
   (defun split-window-below-and-focus ()
     "Split window on two and focus one below."
     (interactive)
@@ -30,28 +81,15 @@
     (other-window 1))
 
   (defun xah-fly-command-mode-init ()
-    "Set command mode keys.
-Modified version 2017-01-21"
+    "Set command mode keys."
     (interactive)
-    (xah-fly--define-keys
+    (qwerty--define-keys
      xah-fly-key-map
      '(
        ("~" . nil)
-       (":" . nil)
 
        ("SPC" . xah-fly-leader-key-map)
        ("DEL" . xah-fly-leader-key-map)
-
-       ("'" . xah-reformat-lines)
-       ("," . xah-shrink-whitespaces)
-       ("-" . xah-cycle-hyphen-underscore-space)
-       ("." . xah-backward-kill-word)
-       (";" . xah-comment-dwim)
-       ("/" . hippie-expand)
-       ("\\" . nil)
-       ("[" . xah-backward-punct )
-       ("]" . xah-forward-punct)
-       ("`" . other-frame)
 
        ("1" . xah-extend-selection)
        ("2" . xah-select-line)
@@ -63,69 +101,41 @@ Modified version 2017-01-21"
        ("8" . xah-extend-selection)
        ("9" . xah-select-text-in-quote)
        ("0" . xah-pop-local-mark-ring)
+       ("-" . xah-cycle-hyphen-underscore-space)
 
+       ("q" . xah-reformat-lines)
+       ("w" . xah-shrink-whitespaces)
+       ("e" . xah-backward-kill-word)
+       ("r" . xah-kill-word)
+       ("t" . set-mark-command)
+       ("y" . undo)
+       ("u" . backward-word)
+       ("i" . previous-line)
+       ("o" . forward-word)
+       ("p" . xah-insert-space-before)
+       ("[" . hippie-expand)
+                                        ; ("]" . xah-forward-equal-sign)
        ("a" . execute-extended-command)
-       ("b" . isearch-forward)
-       ("c" . previous-line)
-       ("d" . xah-beginning-of-line-or-block)
-       ("e" . xah-delete-backward-char-or-bracket-text)
-       ("f" . undo)
-       ("g" . backward-word)
-       ("h" . backward-char)
-       ("i" . xah-delete-current-text-block)
-       ("j" . xah-copy-line-or-region)
-       ("k" . xah-paste-or-paste-previous)
-       ("l" . xah-insert-space-before)
+       ("s" . open-line)
+       ("d" . xah-delete-backward-char-or-bracket-text)
+       ("f" . xah-fly-insert-mode-activate)
+       ("g" . xah-delete-current-text-block)
+       ("h" . xah-beginning-of-line-or-block)
+       ("j" . backward-char)
+       ("k" . next-line)
+       ("l" . forward-char)
+       (";" . xah-end-of-line-or-block)
+       ("'" . xah-cycle-hyphen-underscore-space)
+       ("z" . xah-comment-dwim)
+       ("x" . xah-cut-line-or-region)
+       ("c" . xah-delete-current-text-block)
+       ("v" . xah-paste-or-paste-previous)
+       ("b" . xah-toggle-letter-case)
+       ("n" . isearch-forward)
        ("m" . xah-backward-left-bracket)
-       ("n" . forward-char)
-       ("o" . open-line)
-       ("p" . xah-kill-word)
-       ("q" . xah-cut-line-or-region)
-       ("r" . forward-word)
-       ("s" . xah-end-of-line-or-block)
-       ("t" . next-line)
-       ("u" . xah-fly-insert-mode-activate)
-       ("v" . xah-forward-right-bracket)
-       ("w" . xah-next-window-or-frame)
-       ("x" . xah-toggle-letter-case)
-       ("y" . set-mark-command)
-       ("z" . xah-goto-matching-bracket)
-
-       ;; russian analog
-       ("й" . xah-reformat-lines)
-       ("ц" . xah-shrink-whitespaces)
-       ("э" . xah-cycle-hyphen-underscore-space)
-       ("у" . xah-backward-kill-word)
-       ("я" . xah-comment-dwim)
-       ("х" . hippie-expand)
-       ("ё" . nil)
-
-       ("ф" . execute-extended-command)
-       ("т" . isearch-forward)
-       ("ш" . previous-line)
-       ("р" . xah-beginning-of-line-or-block)
-       ("в" . xah-delete-backward-char-or-bracket-text)
-       ("н" . undo)
-       ("г" . backward-word)
-       ("о" . backward-char)
-       ("п" . xah-delete-current-text-block)
-       ("с" . xah-copy-line-or-region)
-       ("м" . xah-paste-or-paste-previous)
-       ("з" . xah-insert-space-before)
-       ("ь" . xah-backward-left-bracket)
-       ("д" . forward-char)
-       ("ы" . open-line)
-       ("к" . xah-kill-word)
-       ("ч" . xah-cut-line-or-region)
-       ("щ" . forward-word)
-       ("ж" . xah-end-of-line-or-block)
-       ("л" . next-line)
-       ("а" . xah-fly-insert-mode-activate)
-       ("ю" . xah-forward-right-bracket)
-       ("б" . xah-next-window-or-frame)
-       ("и" . xah-toggle-letter-case)
-       ("е" . set-mark-command)
-       ("/" . xah-goto-matching-bracket)))
+       ("," . xah-next-window-or-frame)
+       ("." . xah-forward-right-bracket)
+       ))
 
     (define-key xah-fly-key-map (kbd "a")
       (if (fboundp 'smex) 'smex (if (fboundp 'helm-M-x) 'helm-M-x 'execute-extended-command)))
@@ -138,28 +148,15 @@ Modified version 2017-01-21"
     (force-mode-line-update))
 
   (defun xah-fly-insert-mode-init ()
-    "Set insertion mode keys"
+    "Set insertion mode keys."
     (interactive)
-
-    (xah-fly--define-keys
+    (qwerty--define-keys
      xah-fly-key-map
      '(
+       ("~" . nil)
 
        ("SPC" . nil)
        ("DEL" . nil)
-
-       ("'" . nil)
-       ("," . nil)
-       ("-" . nil)
-       ("." . nil)
-       ("/" . nil)
-       (";" . nil)
-       ("=" . nil)
-       ("[" . nil)
-       ("\\" . nil)
-       ("]" . nil)
-       ("`" . nil)
-       ("~" . nil)
 
        ("1" . nil)
        ("2" . nil)
@@ -171,128 +168,102 @@ Modified version 2017-01-21"
        ("8" . nil)
        ("9" . nil)
        ("0" . nil)
+       ("-" . nil)
+       ("=" . nil)
 
-       ("a" . nil)
-       ("b" . nil)
-       ("c" . nil)
-       ("d" . nil)
+       ("q" . nil)
+       ("w" . nil)
        ("e" . nil)
+       ("r" . nil)
+       ("t" . nil)
+       ("y" . nil)
+       ("u" . nil)
+       ("i" . nil)
+       ("o" . nil)
+       ("p" . nil)
+       ("[" . nil)
+       ("]" . nil)
+       ("a" . nil)
+       ("s" . nil)
+       ("d" . nil)
        ("f" . nil)
        ("g" . nil)
        ("h" . nil)
-       ("i" . nil)
        ("j" . nil)
        ("k" . nil)
        ("l" . nil)
-       ("m" . nil)
-       ("n" . nil)
-       ("o" . nil)
-       ("p" . nil)
-       ("q" . nil)
-       ("r" . nil)
-       ("s" . nil)
-       ("t" . nil)
-       ("u" . nil)
-       ("v" . nil)
-       ("w" . nil)
-       ("x" . nil)
-       ("y" . nil)
+       (";" . nil)
+       ("'" . nil)
+       ("\\" . nil)
+       ("`" . nil)
        ("z" . nil)
-
-       ;; russian analog
-       ("й" . nil)
-       ("ц" . nil)
-       ("э" . nil)
-       ("у" . nil)
-       ("я" . nil)
-       ("х" . nil)
-       ("ё" . nil)
-
-       ("ф" . nil)
-       ("т" . nil)
-       ("ш" . nil)
-       ("р" . nil)
-       ("в" . nil)
-       ("н" . nil)
-       ("г" . nil)
-       ("о" . nil)
-       ("п" . nil)
-       ("с" . nil)
-       ("м" . nil)
-       ("з" . nil)
-       ("ь" . nil)
-       ("д" . nil)
-       ("ы" . nil)
-       ("к" . nil)
-       ("ч" . nil)
-       ("щ" . nil)
-       ("ж" . nil)
-       ("л" . nil)
-       ("а" . nil)
-       ("ю" . nil)
-       ("б" . nil)
-       ("и" . nil)
-       ("е" . nil)
-       ("/" . nil)))
+       ("x" . nil)
+       ("c" . nil)
+       ("v" . nil)
+       ("b" . nil)
+       ("n" . nil)
+       ("m" . nil)
+       ("," . nil)
+       ("." . nil)
+       ("/" . nil)
+       ))
 
     (progn
-      (setq xah-fly-insert-state-q t )
+      (setq xah-fly-insert-state-q t)
       (modify-all-frames-parameters (list (cons 'cursor-type 'bar))))
 
     (setq mode-line-front-space "I")
     (force-mode-line-update))
 
-  (defun my-previous-word-at-point ()
-    "Find previous occurrence of the word at point."
-    (interactive)
-    (word-search-backward (thing-at-point 'symbol)))
-
-  (defun my-next-word-at-point ()
-    "Find next occurrence of the word at point."
-    (interactive)
-    (word-search-forward (thing-at-point 'symbol)))
-
-  (xah-fly--define-keys
-   (define-prefix-command 'my-goto-anything-keymap)
+  (qwerty--define-keys
+   xah-fly-key-map
    '(
-     ("i" . find-file-in-project-at-point) ; g
+     ("C-a" . mark-whole-buffer)
+     ("C-n" . xah-new-empty-buffer)
+     ("C-o" . find-file)
+     ("C-s" . save-buffer)
+     ("C-v" . yank)
+     ("C-w" . xah-close-current-buffer)
+     ("C-z" . undo)
+     ))
 
-     ;; russian analog
-     ("п" . find-file-in-project-at-point)))
-
-  (xah-fly--define-keys
+  (qwerty--define-keys
    xah-fly-leader-key-map
    '(
-     ("4" . split-window-right-and-focus)
-     ("v" . my-goto-anything-keymap) ; .
+     ("4" . split-window-right-and-focus)))
 
-     ;; russian analog
-     ("ю" . my-goto-anything-keymap)))
-
-  (global-set-key (kbd "M-p") 'my-previous-word-at-point)
-  (global-set-key (kbd "M-n") 'my-next-word-at-point)
-
+  (xah-fly-keys-set-layout "qwerty")
+  (xah-fly-keys 1)
   (global-set-key (kbd "<home>") 'xah-fly-command-mode-activate-no-hook))
+
 (use-package which-key
-  :ensure t
   :config
   (which-key-mode))
 
-(use-package company
-  :ensure t
-  :init
-  (global-company-mode))
+;; http://ergoemacs.org/emacs/emacs_key_notation_return_vs_RET.html
+(use-package multiple-cursors
+  :commands
+  (mc/mark-previous-like-this
+   mc/mark-next-like-this
+   mc/mark-next-like-this-word
+   mc/skip-to-next-like-this
+   mc/edit-ends-of-lines)
+  :bind
+  (("C-k" . mc/mark-next-like-this)
+   ("C-d" . mc/mark-next-like-this-word)
+   ("C-f" . mc/skip-to-next-like-this)
+   ("C-l" . mc/edit-ends-of-lines)))
+
 
 (use-package ivy
-  :ensure t
   :init
-  (setq ivy-extra-directories nil)
-  (setq ivy-re-builders-alist '((read-file-name-internal . ivy--regex-plus)
+  (setq ivy-extra-directories nil
+        ivy-re-builders-alist '((read-file-name-internal . ivy--regex-plus)
                                 (t . ivy--regex-fuzzy)))
   (ivy-mode 1))
 
+
 (use-package find-file-in-project
-  :ensure t
   :config
   (defun safe-find-file-in-project ()
     "Same as `find-file-in-project`, except avoids search in the home directory."
@@ -301,17 +272,17 @@ Modified version 2017-01-21"
         (message "Since project directory is `~/`, use open-file.")
       (find-file-in-project)))
 
-  (global-set-key (kbd "C-p") 'safe-find-file-in-project)
+  (qwerty--define-keys
+   global-map
+   '(
+     ("C-p" . safe-find-file-in-project)
+     ;; russian analog
+     ("C-з" . safe-find-file-in-project)
+     )))
 
-  ;; russian analog
-  (global-set-key (kbd "C-з") 'safe-find-file-in-project))
 
-(use-package all-the-icons
-  :ensure t)
-;; todo simplify the installation
-;; M-x all-the-icons-install-fonts
+(use-package all-the-icons)
 (use-package neotree
-  :ensure t
   :config
   (defun neo-buffer--insert-root-entry (node)
     "Shorter pwd in neotree."
@@ -348,35 +319,52 @@ Modified version 2017-01-21"
       (neotree-project-dir)))
 
   (setq-default neo-show-hidden-files t)
-  (setq neo-show-updir-line nil)
-  (setq neo-smart-open t)
-  (setq neo-theme (if (display-graphic-p) 'icons 'ascii))
-  (define-key neotree-mode-map (kbd "k") 'neotree-next-line)
-  (define-key neotree-mode-map (kbd "i") 'neotree-previous-line)
-  (define-key neotree-mode-map (kbd "j") 'backward-char)
-  (define-key neotree-mode-map (kbd "l") 'forward-char)
-  (define-key neotree-mode-map (kbd "C-b") 'neotree-toggle)
-  (define-key neotree-mode-map (kbd "C-n") nil)
-  (define-key neotree-mode-map (kbd "p") nil)
-  (define-key neotree-mode-map (kbd "n") nil)
-  (global-set-key (kbd "C-b") 'neotree-project-dir)
+  (setq neo-show-updir-line nil
+        neo-smart-open t
+        neo-theme (if (display-graphic-p) 'icons 'ascii))
 
-  ;; russian analog
-  (define-key neotree-mode-map (kbd "л") 'neotree-next-line)
-  (define-key neotree-mode-map (kbd "ш") 'neotree-previous-line)
-  (define-key neotree-mode-map (kbd "о") 'backward-char)
-  (define-key neotree-mode-map (kbd "д") 'forward-char)
-  (define-key neotree-mode-map (kbd "C-и") 'neotree-toggle)
-  (define-key neotree-mode-map (kbd "C-т") nil)
-  (define-key neotree-mode-map (kbd "з") nil)
-  (define-key neotree-mode-map (kbd "т") nil)
-  (global-set-key (kbd "C-и") 'neotree-project-dir))
+  (qwerty--define-keys
+   neotree-mode-map
+   '(
+     ("k" . neotree-next-line)
+     ("i" . neotree-previous-line)
+     ("j" . backward-char)
+     ("l" . forward-char)
+     ("C-b" . neotree-toggle)
+     ("C-n" . nil)
+     ("p" . nil)
+     ("n" . nil)
+     ;; russian analog
+     ("л" . neotree-next-line)
+     ("ш" . neotree-previous-line)
+     ("о" . backward-char)
+     ("д" . forward-char)
+     ("C-и" . neotree-toggle)
+     ("C-т" . nil)
+     ("з" . nil)
+     ("т" . nil)
+     ))
+  (qwerty--define-keys
+   global-map
+   '(
+     ("C-b" . neotree-project-dir)
+     ;; russian analog
+     ("C-и" . neotree-project-dir))
+   ))
 
-(use-package css-mode
-  :mode ("\\.styl$" . css-mode))
+
+(use-package company)
+(use-package flycheck)
+(use-package tide
+  :after (typescript-mode company flycheck)
+  :hook ((typescript-mode . tide-setup)
+         (typescript-mode . tide-hl-identifier-mode)
+         (before-save . tide-format-before-save)))
+
+(use-package css-mode)
+(use-package pug-mode)
 
 (use-package js2-mode
-  :ensure t
   :init
   (setq-default js-indent-align-list-continuation nil)
   (add-hook 'js-mode-hook 'js2-minor-mode)
@@ -391,27 +379,21 @@ turn off indentation support for it."
     nil))
 
 (use-package rjsx-mode
-  :ensure t
   :mode
   ("\\.js$" . rjsx-mode))
 
-(use-package pug-mode
-  :ensure t)
-
-(use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1))
 
 (use-package linum
   :init
   (setq linum-format " %d ")
   :hook ((css-mode . linum-mode)
-         (elisp-mode . linum-mode)
-         (js-mode . linum-mode)))
+         (js-mode . linum-mode)
+         (typescript-mode . linum-mode)))
+
+
+(use-package fireplace)
 
 (use-package github-modern-theme
-  :ensure t
   :init
   ;; Color fix for os x terminal. Emacs maps incorrect colors,
   ;; for example, white is grey and etc.
@@ -441,40 +423,23 @@ turn off indentation support for it."
     nil)
   (load-theme 'github-modern t))
 
-(use-package fireplace
-  :ensure t)
 
+(define-key global-map (kbd "C-\\") 'comment-line)
 
-(menu-bar-mode -1)
-(when (display-graphic-p)
-  (toggle-scroll-bar -1)
-  (tool-bar-mode -1)
-  (set-face-attribute 'default nil
-		      :family "Meslo LG S"
-		      :height 140
-		      :weight 'normal
-		      :width 'normal)
-  (setq-default line-spacing 2))
-
-(setq inhibit-startup-screen t)
-(setq make-backup-files nil) ; stop creating backup~ files
-(setq auto-save-default nil) ; stop creating #autosave# files
-(setq create-lockfiles nil)
-(column-number-mode)
 
 (setq require-final-newline t)
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (electric-pair-mode 1)
 
-(global-set-key (kbd "C-/") 'comment-line)
 
 (defun my-setup-indent (n)
-  (setq css-indent-offset n) ; css-mode
-  (setq js-indent-level n) ; js-mode
-  (setq js2-basic-offset n) ; js2-mode
-  (setq pug-tab-width n)
-  (setq sgml-basic-offset n)
-  (setq standard-indent n))
+  (setq css-indent-offset n ; css-mode
+        js-indent-level n ; js-mode
+        js2-basic-offset n ; js2-mode
+        pug-tab-width n
+        sgml-basic-offset n
+        standard-indent n
+        typescript-indent-level n))
 
 (setq-default indent-tabs-mode nil)
 (my-setup-indent 2)
