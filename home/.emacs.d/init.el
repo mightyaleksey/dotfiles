@@ -68,6 +68,8 @@
   :init
   (setq xah-fly-use-control-key nil)
   :config
+  (xah-fly-keys-set-layout "qwerty")
+
   (defun split-window-below-and-focus ()
     "Split window on two and focus one below."
     (interactive)
@@ -87,6 +89,7 @@
      xah-fly-key-map
      '(
        ("~" . nil)
+       (":" . nil)
 
        ("SPC" . xah-fly-leader-key-map)
        ("DEL" . xah-fly-leader-key-map)
@@ -101,7 +104,8 @@
        ("8" . xah-extend-selection)
        ("9" . xah-select-text-in-quote)
        ("0" . xah-pop-local-mark-ring)
-       ("-" . xah-cycle-hyphen-underscore-space)
+       ("-" . xah-backward-punct)
+       ("=" . xah-forward-punct)
 
        ("q" . xah-reformat-lines)
        ("w" . xah-shrink-whitespaces)
@@ -114,7 +118,7 @@
        ("o" . forward-word)
        ("p" . xah-insert-space-before)
        ("[" . hippie-expand)
-                                        ; ("]" . xah-forward-equal-sign)
+       ;; ("]" . xah-forward-equal-sign)
        ("a" . execute-extended-command)
        ("s" . open-line)
        ("d" . xah-delete-backward-char-or-bracket-text)
@@ -126,15 +130,18 @@
        ("l" . forward-char)
        (";" . xah-end-of-line-or-block)
        ("'" . xah-cycle-hyphen-underscore-space)
+       ("\\" . nil)
+       ("`" . other-frame)
        ("z" . xah-comment-dwim)
        ("x" . xah-cut-line-or-region)
-       ("c" . xah-delete-current-text-block)
+       ("c" . xah-copy-line-or-region)
        ("v" . xah-paste-or-paste-previous)
        ("b" . xah-toggle-letter-case)
        ("n" . isearch-forward)
        ("m" . xah-backward-left-bracket)
        ("," . xah-next-window-or-frame)
        ("." . xah-forward-right-bracket)
+       ("/" . xah-goto-matching-bracket)
        ))
 
     (define-key xah-fly-key-map (kbd "a")
@@ -154,6 +161,7 @@
      xah-fly-key-map
      '(
        ("~" . nil)
+       (":" . nil)
 
        ("SPC" . nil)
        ("DEL" . nil)
@@ -232,9 +240,94 @@
    '(
      ("4" . split-window-right-and-focus)))
 
-  (xah-fly-keys-set-layout "qwerty")
-  (xah-fly-keys 1)
-  (global-set-key (kbd "<home>") 'xah-fly-command-mode-activate-no-hook))
+  (global-set-key (kbd "<home>") 'xah-fly-command-mode-activate-no-hook)
+
+  (defun xah-fly-keys-russian-on ()
+    "Add russian layout keys."
+    (interactive)
+    (progn
+      (qwerty--define-keys
+       xah-fly-key-map
+       '(
+         ("й" . xah-reformat-lines)
+         ("ц" . xah-shrink-whitespaces)
+         ("у" . xah-backward-kill-word)
+         ("к" . xah-kill-word)
+         ("е" . set-mark-command)
+         ("н" . undo)
+         ("г" . backward-word)
+         ("ш" . previous-line)
+         ("щ" . forward-word)
+         ("з" . xah-insert-space-before)
+         ("х" . hippie-expand)
+         ("ф" . execute-extended-command)
+         ("ы" . open-line)
+         ("в" . xah-delete-backward-char-or-bracket-text)
+         ("а" . xah-fly-insert-mode-activate)
+         ("п" . xah-delete-current-text-block)
+         ("р" . xah-beginning-of-line-or-block)
+         ("о" . backward-char)
+         ("л" . next-line)
+         ("д" . forward-char)
+         ("ж" . xah-end-of-line-or-block)
+         ("э" . xah-cycle-hyphen-underscore-space)
+         ("ё" . nil)
+         ("я" . xah-comment-dwim)
+         ("ч" . xah-cut-line-or-region)
+         ("с" . xah-copy-line-or-region)
+         ("м" . xah-paste-or-paste-previous)
+         ("и" . xah-toggle-letter-case)
+         ("т" . isearch-forward)
+         ("ь" . xah-backward-left-bracket)
+         ("б" . xah-next-window-or-frame)
+         ("ю" . xah-forward-right-bracket)
+         ))))
+
+  (defun xah-fly-keys-russian-off ()
+    "Remove russian layout keys."
+    (interactive)
+    (progn
+      (qwerty--define-keys
+       xah-fly-key-map
+       '(
+         ("й" . nil)
+         ("ц" . nil)
+         ("у" . nil)
+         ("к" . nil)
+         ("е" . nil)
+         ("н" . nil)
+         ("г" . nil)
+         ("ш" . nil)
+         ("щ" . nil)
+         ("з" . nil)
+         ("х" . nil)
+         ("ф" . nil)
+         ("ы" . nil)
+         ("в" . nil)
+         ("а" . nil)
+         ("п" . nil)
+         ("р" . nil)
+         ("о" . nil)
+         ("л" . nil)
+         ("д" . nil)
+         ("ж" . nil)
+         ("э" . nil)
+         ("ё" . nil)
+         ("я" . nil)
+         ("ч" . nil)
+         ("с" . nil)
+         ("м" . nil)
+         ("и" . nil)
+         ("т" . nil)
+         ("ь" . nil)
+         ("б" . nil)
+         ("ю" . nil)
+         ))))
+
+  (add-hook 'xah-fly-command-mode-activate-hook 'xah-fly-keys-russian-on)
+  (add-hook 'xah-fly-insert-mode-activate-hook 'xah-fly-keys-russian-off)
+
+  (xah-fly-keys 1))
 
 (use-package which-key
   :config
