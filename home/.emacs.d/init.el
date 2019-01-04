@@ -459,7 +459,8 @@
 
 (use-package js2-mode
   :init
-  (setq-default js-indent-align-list-continuation nil)
+  (setq-default js-indent-align-list-continuation nil
+                js2-strict-trailing-comma-warning nil)
   (add-hook 'js-mode-hook 'js2-minor-mode)
   :config
   (defun js--multi-line-declaration-indentation ()
@@ -473,7 +474,11 @@ turn off indentation support for it."
 
 (use-package rjsx-mode
   :mode
-  ("\\.js$" . rjsx-mode))
+  ("\\.js$" . rjsx-mode)
+  :config
+  (define-key rjsx-mode-map "<" nil)
+  (define-key rjsx-mode-map (kbd "C-d") nil)
+  (define-key rjsx-mode-map ">" nil))
 
 
 (use-package linum
