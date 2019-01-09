@@ -393,6 +393,16 @@
      (propertize (neo-path--file-short-name node) 'face 'neo-root-dir-face))
     (neo-buffer--newline-and-begin))
 
+  (defun neotree-open-file-and-hide ()
+    "Open file and hide NeoTree window."
+    (interactive)
+    (if (not (file-directory-p
+              (neo-buffer--get-filename-current-line)))
+        (progn
+          (neotree-enter)
+          (neotree-hide))
+      (neotree-enter)))
+
   (defun neotree-project-dir ()
     "Open NeoTree using the git root."
     (interactive)
@@ -419,14 +429,15 @@
   (qwerty--define-keys
    neotree-mode-map
    '(
-     ("k" . neotree-next-line)
-     ("i" . neotree-previous-line)
-     ("j" . backward-char)
-     ("l" . forward-char)
+     ("RET" . neotree-open-file-and-hide)
+     ("k"   . neotree-next-line)
+     ("i"   . neotree-previous-line)
+     ("j"   . backward-char)
+     ("l"   . forward-char)
      ("C-b" . neotree-toggle)
      ("C-n" . nil)
-     ("p" . nil)
-     ("n" . nil)
+     ("p"   . nil)
+     ("n"   . nil)
      ;; russian analog
      ("л" . neotree-next-line)
      ("ш" . neotree-previous-line)
@@ -454,7 +465,9 @@
          (typescript-mode . tide-hl-identifier-mode)
          (before-save . tide-format-before-save)))
 
-(use-package css-mode)
+(use-package css-mode
+  :mode
+  ("\\.styl$" . css-mode))
 (use-package pug-mode)
 
 (use-package js2-mode

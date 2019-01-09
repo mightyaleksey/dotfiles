@@ -20,7 +20,7 @@
 # Inside double quotes, double quote " and backslash \ characters must be escaped: use \" for " and \\ for \.
 
 [user]
-  name = Alexey Litvinov
+  name = Aleksey Litvinov
   email = iamhoneyboy@gmail.com
 
 [core]
