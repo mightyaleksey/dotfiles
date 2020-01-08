@@ -1,0 +1,31 @@
+# Syntax
+
+# The syntax is fairly flexible and permissive; whitespaces are mostly ignored.
+# The # and ; characters begin comments to the end of line, blank lines are ignored.
+
+# The file consists of sections and variables.
+# A section begins with the name of the section in square brackets and continues until the next section begins.
+# Section names are case-insensitive. Only alphanumeric characters, - and . are allowed in section names.
+# Each variable must belong to some section, which means that there must be a section header before the first setting of a variable.
+
+# All the other lines (and the remainder of the line after the section header) are recognized as setting variables,
+# in the form name = value (or just name, which is a short-hand to say that the variable is the boolean "true").
+# The variable names are case-insensitive, allow only alphanumeric characters and -, and must start with an alphabetic character.
+
+# A line that defines a value can be continued to the next line by ending it with a \; the backquote and the end-of-line are stripped.
+# Leading whitespaces after name =, the remainder of the line after the first comment character # or ;,
+# and trailing whitespaces of the line are discarded unless they are enclosed in double quotes.
+# Internal whitespaces within the value are retained verbatim.
+
+# Inside double quotes, double quote " and backslash \ characters must be escaped: use \" for " and \\ for \.
+
+[user]
+  name = Aleksey Litvinov
+  email = iamhoneyboy@gmail.com
+
+[core]
+  editor = "emacs --no-window-system"
+  ignorecase = false
+
+[push]
+  default = upstream
