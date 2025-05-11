@@ -6,6 +6,16 @@
 # man zshmisc > SIMPLE PROMPT ESCAPES
 PROMPT="%F{blue}%n%f %(4~|%-1~/../%2~|%~) %F{242}$%f "
 
+# command history configuration
+[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
+HISTSIZE=2000
+SAVEHIST=1000
+
+# man zshoptions
+setopt extended_history   # record timestamp of command in HISTFILE
+setopt hist_ignore_dups   # ignore duplicated commands if they match the previous event
+setopt inc_append_history # add commands to HISTFILE in order of execution
+
 # fix tab title in hyper.is
 # https://zsh.sourceforge.io/Doc/Release/Functions.html#index-precmd
 function gitDirty() {
@@ -20,16 +30,6 @@ function precmd() {
 function preexec() {
   printf "\033]0;%s\a" "${1%% *} | $current_dir$(gitDirty)"
 }
-
-# command history configuration
-[ -z "$HISTFILE" ] && HISTFILE="$HOME/.zsh_history"
-HISTSIZE=2000
-SAVEHIST=1000
-
-# man zshoptions
-setopt extended_history   # record timestamp of command in HISTFILE
-setopt hist_ignore_dups   # ignore duplicated commands if they match the previous event
-setopt inc_append_history # add commands to HISTFILE in order of execution
 
 # `fn-delete` (forward delete)
 # http://superuser.com/a/169930/165804
